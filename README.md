@@ -1,5 +1,5 @@
-# [Ω Olympus Frontend](https://app.olympusdao.finance/)
-This is the front-end repo for Olympus that allows users be part of the future of Greece. 
+# [Ω Official TITAN DAO Frontend](https://app.olympusdao.finance/)
+This is the front-end repo fork of Olympus that allows users be part of the future of the crypto global nations. 
 
 **_ Note We're currently in the process of switching to TypeScript. Please read  this  guide on how to use TypeScript for this repository. https://github.com/OlympusDAO/olympus-frontend/wiki/TypeScript-Refactor-General-Guidelines _**
 
