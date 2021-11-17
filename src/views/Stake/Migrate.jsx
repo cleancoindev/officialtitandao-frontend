@@ -99,7 +99,7 @@ export default function Migrate() {
     }
 
     await dispatch(
-      changeStake({ action: ACTIONS.UNSTAKE, address, value: quantity.toString(), provider, networkID: 1 }),
+      changeStake({ action: ACTIONS.UNSTAKE, address, value: quantity.toString(), provider, networkID: 137 }),
     );
   };
 
@@ -109,13 +109,13 @@ export default function Migrate() {
       return;
     }
 
-    await dispatch(changeStake({ action: ACTIONS.STAKE, address, value: quantity.toString(), provider, networkID: 1 }));
+    await dispatch(changeStake({ action: ACTIONS.STAKE, address, value: quantity.toString(), provider, networkID: 137 }));
   };
 
   const hasAllowance = useCallback(
     token => {
-      if (token === "ohm") return stakeAllowance > 0;
-      if (token === "sohm") return unstakeAllowance > 0;
+      if (token === "titan2") return stakeAllowance > 0;
+      if (token === "stitan") return unstakeAllowance > 0;
       return false;
     },
     [stakeAllowance, unstakeAllowance],
@@ -185,7 +185,7 @@ export default function Migrate() {
             <Link component={NavLink} to="/stake" className="cancel-migrate">
               <SvgIcon component={XIcon} />
             </Link>
-            <Typography variant="h3">sOHM Migration</Typography>
+            <Typography variant="h3">sTitan Migration</Typography>
           </div>
 
           {!address ? (
@@ -202,19 +202,19 @@ export default function Migrate() {
               <div className="stake-migration-help">
                 {view === "unstake" && (
                   <Typography>
-                    Hey Ohmie, Olympus is updating the staking contract. So in order to continue earning those juicy
-                    rewards you'll need to unstake your sOHM from the old contract and restake it to the new sOHM
+                    Hey Fellow Titan, Official TitanDAO is updating the staking contract. So in order to continue earning those juicy
+                    rewards you'll need to unstake your sTITAN from the old contract and restake it to the new sOHM
                     contract.
                   </Typography>
                 )}
 
                 {view === "stake" && (
                   <Typography>
-                    Youre almost done, all thats left now is to Stake your OHM to the new contract.
+                    Youre almost done, all thats left now is to Stake your TITAN2 to the new contract.
                   </Typography>
                 )}
 
-                {view === "done" && <Typography>Youre good to go, all OHM is staked to the new contract.</Typography>}
+                {view === "done" && <Typography>Youre good to go, all Titan2 is staked to the new contract.</Typography>}
               </div>
 
               <Breadcrumbs className={`migration-breadcrumbs`} separator={<DoubleArrowIcon fontSize="medium" />}>
@@ -225,7 +225,7 @@ export default function Migrate() {
                   }}
                   className={`breadcrumb ${currentStep === "1" ? "current-step" : "finished-step"}`}
                 >
-                  Step 1: Unstake sOHM (old)
+                  Step 1: Unstake sTitan (old)
                 </div>
                 <div
                   role="button"
@@ -236,7 +236,7 @@ export default function Migrate() {
                     currentStep === "3" && "finished-step"
                   }`}
                 >
-                  Step 2: Stake sOHM (new)
+                  Step 2: Stake sTitan (new)
                 </div>
               </Breadcrumbs>
 
@@ -275,7 +275,7 @@ export default function Migrate() {
                       />
                     </FormControl>
 
-                    {address && hasAllowance("sohm") && view === "unstake" && (
+                    {address && hasAllowance("stitan") && view === "unstake" && (
                       <Button
                         variant="contained"
                         color="primary"
@@ -286,11 +286,11 @@ export default function Migrate() {
                           setView("stake");
                         }}
                       >
-                        {txnButtonText(pendingTransactions, "migrate_unstaking", "Unstake sOHM (legacy)")}
+                        {txnButtonText(pendingTransactions, "migrate_unstaking", "Unstake sTitan (legacy)")}
                       </Button>
                     )}
 
-                    {address && hasAllowance("ohm") && view === "stake" && (
+                    {address && hasAllowance("titan2") && view === "stake" && (
                       <Button
                         variant="contained"
                         color="primary"
@@ -301,7 +301,7 @@ export default function Migrate() {
                           setView("done");
                         }}
                       >
-                        {txnButtonText(pendingTransactions, "migrate_staking", "Stake OHM (new)")}
+                        {txnButtonText(pendingTransactions, "migrate_staking", "Stake Titan2 (new)")}
                       </Button>
                     )}
 
@@ -318,7 +318,7 @@ export default function Migrate() {
                       </Button>
                     )}
 
-                    {address && !hasAllowance("ohm") && view === "stake" && (
+                    {address && !hasAllowance("titan2") && view === "stake" && (
                       <Button
                         variant="contained"
                         color="primary"
@@ -333,7 +333,7 @@ export default function Migrate() {
 
                   <div className="stake-notification">
                     {address &&
-                      ((!hasAllowance("ohm") && view === "stake") || (!hasAllowance("sohm") && view === "unstake")) && (
+                      ((!hasAllowance("titan2") && view === "stake") || (!hasAllowance("sohm") && view === "unstake")) && (
                         <em>
                           <Typography>
                             "Approve" transaction is only needed when staking/unstaking for the first time; subsequent
@@ -349,7 +349,7 @@ export default function Migrate() {
 
               <Box className={`stake-user-data`}>
                 <div className="data-row">
-                  <Typography>Ohm Balance</Typography>
+                  <Typography>Titan2 Balance</Typography>
                   <Typography>{trim(ohmBalance)} OHM</Typography>
                 </div>
                 <div className="data-row">
